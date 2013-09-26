@@ -1,3 +1,15 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Sep 26 14:35:54 2013
+
+@author: olgis
+
+Problem: What is the largest prime factor of the number 600851475143 ?
+
+"""
+
+import time
+
 def isprime(n):
     '''check if integer n is a prime'''
     # make sure n is a positive integer
@@ -28,3 +40,9 @@ def high_prime(n):
                 k = x
         x = x + 2
     return k
+    
+start = time.time()
+product = high_prime(600851475143)
+elapsed = time.time() - start
+
+print "The sum is %s, found in %s sec" % (product, elapsed)

@@ -1,3 +1,23 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Sep 26 14:35:54 2013
+
+@author: olgis
+
+Problem: Find the greatest product of five consecutive digits in 
+the 1000-digit number.
+
+"""
+
+import time
+
+def product_of_five(te):
+    prod = 0
+    for n in range(0, len(te)-5):
+        if int(te[n])*int(te[n+1])*int(te[n+2])*int(te[n+3])*int(te[n+4]) > prod :
+            prod = int(te[n])*int(te[n+1])*int(te[n+2])*int(te[n+3])*int(te[n+4])
+    return prod
+
 tDig = """73167176531330624919225119674426574742355349194934
 96983520312774506326239578318016984801869478851843
 85861560789112949495459501737958331952853208805511
@@ -19,13 +39,12 @@ tDig = """73167176531330624919225119674426574742355349194934
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450"""
 
+
+start = time.time()
+
 myString = "".join(tDig.split())
-print len(myString)
-def product_of_five(te):
-    prod = 0
-    for n in range(0, len(te)-5):
-        if int(te[n])*int(te[n+1])*int(te[n+2])*int(te[n+3])*int(te[n+4]) > prod :
-            prod = int(te[n])*int(te[n+1])*int(te[n+2])*int(te[n+3])*int(te[n+4])
-    return prod
-   
-print  product_of_five(myString)
+product = product_of_five(myString)
+
+elapsed = time.time() - start
+
+print "The greatest product is %s, found in %s sec" % (product, elapsed)

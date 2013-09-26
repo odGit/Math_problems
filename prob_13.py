@@ -1,6 +1,14 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Sep 26 14:35:54 2013
+
+@author: olgis
+
+Problem: Work out the first ten digits of the sum of the following one-hundred
+ 50-digit numbers.
+"""
+
 import time
- 
-start = time.time()
 
 given_dig = """37107287533902102798797998220837590246510135740250
 46376937677490009712648124896970078050417018260538
@@ -113,7 +121,8 @@ def sum_up(numAr):
         a +=int(numAr[row][:10])
     return a
 
+start = time.time()
 myNewNum = sum_up(text_to_num(given_dig))
-
 elapsed = (time.time() - start)
-print "found %s in %s seconds" % (myNewNum,elapsed)
+
+print "The sum is%s, found in %s seconds" % (myNewNum,elapsed)

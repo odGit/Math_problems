@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Sep 26 14:35:54 2013
+
+@author: olgis
+
+Problem: Find the  factorial of 100
+
+"""
+
 import time
 
 def factor(n):
@@ -12,4 +22,9 @@ def frac_dig_sum(num):
         prod += int(dig)
     return prod
 
-print frac_dig_sum(factor(100))
+
+start = time.time()
+product = frac_dig_sum(factor(100))
+elapsed = time.time() - start
+
+print "Factorial is %s, found in %s sec" % (product, elapsed)
