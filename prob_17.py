@@ -33,47 +33,34 @@ num_to_let_dict = {0:"", 1:"one", 2: "two", 3: "three", 4: "four",
 def num_to_let(start, end, my_dict):
     res = 0
     for i in xrange(start, end + 1):
-        if i > 99:
-            print i
-            n = i // 1000
-            if n > 0:
-                res += (len(my_dict[n]) + len(my_dict[1000]))
-                i -= n*1000
-                print "I am hwre"
-            else:
-                k = i // 100
-
-                if k > 0:
-                    res += (len(my_dict[k]) + len(my_dict[100]))
-                p = i % 100
-                if p > 0: res += 3 #for end
-                
-            if p < 21:
-                res += len(my_dict[p])
-            else: 
-                f = p % 10
-                l = p - f
-                res += (len(my_dict[l]))
-                if f > 0:
-                    res += ( len(my_dict[f]))
-                
-        elif i >= int(1e6):
-            print "You exceed the maximum, from 1 to 999 999"
-        else:
-            if i < 21:
-                res += len(my_dict[i])
-            else: 
-                k = i % 10
-                n = i - k
-                res += (len(my_dict[n]))
-                if k > 0:
-                    res += ( len(my_dict[k]))
+        #checking how many 1000 in a number
+        n = i // 1000 
+        if n > 0:
+            res += (len(my_dict[n]) + len(my_dict[1000]))
+            i -= n*1000
+        #checking how many 100 in number    
+        k = i // 100 
+        if k > 0:
+            res += (len(my_dict[k]) + len(my_dict[100]))
+            p = i % 100
+            i -= k*100
+            if p > 0: res += 3 #for AND in "one hundred and fifteen"
+        
             
-    print res
+        if i < 21:
+            res += len(my_dict[i])
+        else: 
+            f = i % 10
+            l = i - f
+            res += (len(my_dict[l]))
+            if f > 0:
+                res += (len(my_dict[f]))
+
     return res
         
 start = time.time()
 product = num_to_let(1, 1000, num_to_let_dict)
 elapsed = time.time() - start
 
-#print product
+print "The result is %s, found in %s sec" %(product, elapsed)
+#The result is 21124, found in 0.00138807296753 sec
