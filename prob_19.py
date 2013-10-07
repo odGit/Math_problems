@@ -16,14 +16,10 @@ IMPORTANT:
     A leap year is any year evenly divisible by 4,
     but not on a century unless it is divisible by 400.
 
-SOLUTION:
-    1. Count how many days are between START_DATE and END_DATE
-    2. Assign week days to them
-    3. select every 1st if it is Mondays.
 """
 
+import datetime
 import time
-import sys
 
 dict_months = {"Jan":1,"Feb":2,"Mar":3, "Apr":4, "May":5, "June":6,
                "July":7, "August":8, "September":9, "October":10,
@@ -31,45 +27,34 @@ dict_months = {"Jan":1,"Feb":2,"Mar":3, "Apr":4, "May":5, "June":6,
                
 dict_days = {1:31, 2:28, 3:31, 4:30, 5:31, 6:30, 7:31, 8:31, 9:30,10:31,
              11:30, 12:31}
-                
+dict_week = {"Monday":0, "Tuesday":1, "Wednesday":2, "Thursday":3, "Friday":4,
+             "Saturday":5, "Sunday":6}
+
 def read_date(my_date):
     for d in my_date.split():
         if d.isdigit():
-            if len(d) > 2:
-                year = int(d)
-            else:
-                day = int(d)
+            if len(d) > 2: year = int(d)
+            else: day = int(d)
         else:
             month = d
-            
     return [day, month, year]
 
-
-def count_days(date1, date2):
-    #extract from string date
-    start_day, start_month, start_year = read_date(date1)
-    end_day, end_month, end_year = read_date(date2)
-    #convert months in to digits
-    start_month = dict_months[start_month]
-    end_month = dict_months[end_month]
-
-    if start_year == end_year:
-        
-        if start_month == end_month: #within the same month
-            days_num = end_day - start_day + 1
-        else:
-            days_num = dict_days[start_month] - start_day + 1 #+1 for start date the start_Date
-            print days_num
-            if start_month + 1 == end_month:
-                days_num += end_day
-            else:
-                for x in xrange(end_month, start_month, -1):
-                    if x == 2 and start_year % 4 == 0:
-                        days_num += 1
-                    days_num += dict_days[x]
-    
+def count_days(start_date, end_date, week_day, date):
+    res = 0
+    str_day, str_month, str_year = read_date(start_date)
+    end_day, end_month, end_year = read_date(end_date)
+    w_day = dict_week[week_day]
+    length = (end_year - str_year) + 1
+    for year in xrange(length, 0, -1):
+        for month in xrange(1,13):
+            d = datetime.date(1900 + year, month, 1)
+            if (d.weekday() == w_day): res += 1
+            
+    return res
 
 
 start = time.time()
-product = count_days("27 Jan 1901","3 Feb 1901")
-elapsed = time.time() - start
+product = count_days("1 Jan 1901", "31 Dec 2000", "Sunday", 1)  
+elapsed = time.time() - start     
+
+print "The answer is %s, it took %s sec"  %(product, elapsed)     
