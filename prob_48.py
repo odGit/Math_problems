@@ -12,15 +12,13 @@ Problem:
 """
 import time
 
+res = 0
 
-limit = 1000
-sum = 0
-
-for i in xrange(1, limit):
-        sum = sum + pow(i,i)
+for i in xrange(1, 1001):
+        res += pow(i,i)
 
 start = time.time()
-product = str(sum)[-10:]
+product = str(res)[-10:]
 elapsed = time.time() - start
 
 print "Last 10 digits is %s, found in %s sec." %(product, elapsed)
