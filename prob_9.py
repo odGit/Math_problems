@@ -54,7 +54,7 @@ def triplet_with_sum(s):
                 b = d*2*m*n
                 c = d*(m**2 + n**2)
                 print "The Pythagorean triple is %d, %d, %d"  % (a, b, c)
-                return a*b*c
+                return a+b+c
             k += 2
     return 0
     
