@@ -30,4 +30,4 @@ elapsed = time() - start
 
 print "Can be filled in %s ways, found in %s sec." %(product, elapsed)
 
-#16475640049
+#found in 0.0170528888702 sec.
