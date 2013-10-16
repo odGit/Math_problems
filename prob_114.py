@@ -10,19 +10,24 @@ Problem:
 
 from time import time
 
-def filling(units,n):
-    solution = 2 #counting the case when all empty +1 and units == n
-    for position in xrange(0, (units-n)+1):
-        for block_length in range(n, (units-position) + 1):
-            solution +=1
-#            print position
-#            print block_length
-    return solution
+memo = dict()
+def filling(size, tiles): 
+    if tiles<size: return 1
+    if tiles==size: return 2
+    if memo.has_key((size,tiles)): return memo[(size,tiles)]
+    ways = 1
+    for s in xrange(size, tiles + 1):
+        for p in xrange(0, tiles-s + 1):
+            ways += filling(size, tiles - (s+p+1))
+    memo[(size,tiles)] = ways
+    return ways
+ 
+
             
 start = time()   
-product = filling(50,3) #1st UNITS, 2nd 
+product = filling(3,50) #1st size, tiles
 elapsed = time() - start
 
-print "in %s ways, found in %s sec." %(product, elapsed)
+print "Can be filled in %s ways, found in %s sec." %(product, elapsed)
 
 #16475640049
