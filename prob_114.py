@@ -14,7 +14,7 @@ memo = dict()
 def filling(size, tiles): 
     if tiles<size: return 1
     if tiles==size: return 2
-    if memo.has_key((size,tiles)): return memo[(size,tiles)]
+    if memo.has_key((size, tiles)): return memo[(size, tiles)]
     ways = 1
     for s in xrange(size, tiles + 1):
         for p in xrange(0, tiles-s + 1):
