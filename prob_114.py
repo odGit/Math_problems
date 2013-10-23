@@ -11,21 +11,22 @@ Problem:
 from time import time
 
 memo = dict()
-def filling(size, tiles): 
-    if tiles<size: return 1
-    if tiles==size: return 2
-    if memo.has_key((size, tiles)): return memo[(size, tiles)]
+
+def filling(size, units): 
+    if units < size: return 1
+    if units == size: return 2
+    if memo.has_key((size, units)): return memo[(size, units)]
     ways = 1
-    for s in xrange(size, tiles + 1):
-        for p in xrange(0, tiles-s + 1):
-            ways += filling(size, tiles - (s+p+1))
-    memo[(size,tiles)] = ways
+    for s in xrange(size, units + 1):
+        for p in xrange(0, units-s + 1):
+            ways += filling(size, units - (s+p+1))
+    memo[(size,units)] = ways
     return ways
  
 
             
 start = time()   
-product = filling(3,50) #1st size, tiles
+product = filling(3, 50) #max block size, units
 elapsed = time() - start
 
 print "Can be filled in %s ways, found in %s sec." %(product, elapsed)
